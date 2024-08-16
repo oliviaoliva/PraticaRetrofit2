@@ -1,6 +1,5 @@
 package com.example.navegacao1.model.dados
 
-import androidx.compose.runtime.Composable
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.toObject
 import com.google.firebase.firestore.toObjects
@@ -10,7 +9,7 @@ class UsuarioDAO {
 
     val db = FirebaseFirestore.getInstance()
 
-    fun buscarUsuarios(callback: (List<Usuario>) -> Unit) {
+    fun buscar(callback: (List<Usuario>) -> Unit) {
         db.collection("usuarios").get()
             .addOnSuccessListener { document ->
                 val usuarios = document.toObjects<Usuario>()
@@ -21,7 +20,7 @@ class UsuarioDAO {
             }
     }
 
-    fun buscarUsuarioPorNome(nome: String, callback: (Usuario?) -> Unit) {
+    fun buscarPorNome(nome: String, callback: (Usuario?) -> Unit) {
         db.collection("usuarios").whereEqualTo("nome", nome).get()
             .addOnSuccessListener { document ->
                 if (!document.isEmpty) {
@@ -36,15 +35,13 @@ class UsuarioDAO {
             }
     }
 
-//    fun adicionarUsuario(usuario: Usuario, callback: (Usuario) -> Unit) {
-//        db.collection("usuarios")
-//            .add(usuario)
-//            .addOnSuccessListener { usuarioCadastrado ->
-//                callback(usuario)
-//            }
-//            .addOnFailureListener { e ->
-//                // Falha ao adicionar usuário
-//            }
-//    }
+    fun buscarPorId(id: String, callback: (Usuario) -> Unit) {
+        //TODO implemente buscar por Id
+    }
+
+
+    fun adicionar(usuario: Usuario, callback: (Usuario) -> Unit) {
+        //TODO implemente adicionar
+    }
 
 }

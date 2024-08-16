@@ -41,7 +41,7 @@ fun TelaLogin(modifier: Modifier = Modifier, onSigninClick: () -> Unit ) {
             onValueChange = {senha = it}, label = { Text(text = "Senha")})
         Button(modifier = Modifier.fillMaxWidth(), onClick = {
             scope.launch(Dispatchers.IO) {
-                usuarioDAO.buscarUsuarioPorNome(login, callback = { usuario ->
+                usuarioDAO.buscarPorNome(login, callback = { usuario ->
                     if (usuario != null && usuario.senha == senha) {
                         onSigninClick()
                     } else {

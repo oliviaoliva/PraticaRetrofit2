@@ -20,7 +20,6 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun TelaPrincipal(modifier: Modifier = Modifier, onLogoffClick: () -> Unit) {
-    val context = LocalContext.current
     var scope = rememberCoroutineScope()
 
     Column(modifier = modifier) {
@@ -29,7 +28,7 @@ fun TelaPrincipal(modifier: Modifier = Modifier, onLogoffClick: () -> Unit) {
 
         Button(onClick = {
             scope.launch(Dispatchers.IO) {
-                usuarioDAO.buscarUsuarios( callback = { usuariosRetornados ->
+                usuarioDAO.buscar( callback = { usuariosRetornados ->
                     usuarios.clear()
                     usuarios.addAll(usuariosRetornados)
                 })
@@ -41,8 +40,11 @@ fun TelaPrincipal(modifier: Modifier = Modifier, onLogoffClick: () -> Unit) {
             Text("Sair")
         }
 
+        //Carrega sob demanda à medida que o usuário rola na tela
         LazyColumn {
             items(usuarios) { usuario ->
+                //TODO melhore esse card. Estão colados, e com pouca informação. Deixe mais
+                // elegante.
                 Card(modifier = Modifier.fillMaxWidth()) {
                     Column {
                         Text(text = usuario.nome)

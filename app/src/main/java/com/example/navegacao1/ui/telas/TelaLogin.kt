@@ -1,5 +1,6 @@
 package com.example.navegacao1.ui.telas
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -42,6 +43,7 @@ fun TelaLogin(modifier: Modifier = Modifier, onSigninClick: () -> Unit ) {
         Button(modifier = Modifier.fillMaxWidth(), onClick = {
             scope.launch(Dispatchers.IO) {
                 usuarioDAO.buscarPorNome(login, callback = { usuario ->
+                    Log.d("login", "passou " + usuario?.nome)
                     if (usuario != null && usuario.senha == senha) {
                         onSigninClick()
                     } else {

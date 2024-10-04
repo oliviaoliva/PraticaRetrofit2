@@ -8,7 +8,7 @@ class Usuario {
     var nome: String = ""
     var senha: String = ""
 
-    constructor()
+    constructor(nome: String, senha: Any)
 
     constructor(id: String, nome: String, senha: String) {
         this.id = id
